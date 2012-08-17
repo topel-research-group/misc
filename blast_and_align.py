@@ -105,8 +105,6 @@ def alignment(method, query_file, database):
 def identify_databases():
 	database_list = []
 	for filename in os.listdir(options.db_dir[0]):
-		print filename			# Devel.
-		print filename[-4:]
 		if filename[-4:] == ".psq":
 			database_list.append(filename[:-4])
 	return database_list
