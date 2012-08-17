@@ -6,6 +6,7 @@ import sys
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
 import subprocess
+import os
 
 # Figure out the options and arguments
 def input(option, opt_str, value, parser):
@@ -27,7 +28,7 @@ def input(option, opt_str, value, parser):
 
 # Options, arguments and help
 usage = "\n  %prog -p [PATR to db dir] -d [blast_db-1 blast_db-2 ...] -q [fasta file] -l [or] -m"
-opts=OptionParser(usage=usage, version="%prog v.0.9")
+opts=OptionParser(usage=usage, version="%prog v.1.0")
 
 opts.add_option("--path", "-p", dest="db_dir", action="callback",
 callback=input, help="Path to directory with blast formated databases")
@@ -53,14 +54,6 @@ callback=input, default=1, help="Same as the BLAST option 'max_target_seqs' that
 options, arguments = opts.parse_args()
 
 ####################################################################
-
-### DEVEL ###
-if options.all_db == True:
-	print "Nono"
-else:
-	print "Tjohoo"
-
-#############
 
 
 def xml_to_fasta(xml_file, db_dir, database, query_file):
@@ -88,7 +81,8 @@ def blast(query_file, blast_db, out_file):
 										task = "blastp",
 										outfmt = 5,
 #										evalue = 1000)              # Hack. Better to check if "*.fasta" file exists.
-										max_target_seqs = options.nr_of_hits[0])
+#										max_target_seqs = options.nr_of_hits[0])
+										max_target_seqs = options.nr_of_hits)
 	stdout, stderr = blast_cmd()
 
 
@@ -108,9 +102,26 @@ def alignment(method, query_file, database):
 	file3.close()
 
 
+def identify_databases():
+	database_list = []
+	for filename in os.listdir(options.db_dir[0]):
+		print filename			# Devel.
+		print filename[-4:]
+		if filename[-4:] == ".psq":
+			database_list.append(filename[:-4])
+	return database_list
+
+
 def run_analysis():
+	# When the -a flag is used
+	if options.all_db == True:
+		my_databases = identify_databases()
+	# When the -a flag is NOT in use
+	if options.all_db == False:
+		my_databases = options.databases
+
 	for query_file in options.query_file:
-		for database in options.databases:
+		for database in my_databases:
 			blast(query_file, "%s/%s" % (options.db_dir[0], database), 
 			"%s_%s.xml" % (query_file[:-4], database))
 			xml_to_fasta("%s_%s.xml" % (query_file[:-4], database), 
