@@ -49,7 +49,7 @@ opts.add_option("--linsi", "-l", dest="linsi_alignment", action="store_true",
 default=False, help="Use linsi to align the sequences")
 
 opts.add_option("--nr_hits", "-n", dest="nr_of_hits", action="callback",
-callback=input, default=1, help="Same as the BLAST option 'max_target_seqs' that indicates the number of hits to save")
+callback=input, default=['1'], help="Same as the BLAST option 'max_target_seqs' that indicates the number of hits to save")
 
 options, arguments = opts.parse_args()
 
@@ -82,7 +82,7 @@ def blast(query_file, blast_db, out_file):
 										outfmt = 5,
 #										evalue = 1000)              # Hack. Better to check if "*.fasta" file exists.
 #										max_target_seqs = options.nr_of_hits[0])
-										max_target_seqs = options.nr_of_hits)
+										max_target_seqs = options.nr_of_hits[0])
 	stdout, stderr = blast_cmd()
 
 
