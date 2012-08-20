@@ -28,7 +28,7 @@ def input(option, opt_str, value, parser):
 
 # Options, arguments and help
 usage = "\n  %prog -p [PATR to db dir] -d [blast_db-1 blast_db-2 ...] -q [fasta file] -l [or] -m"
-opts=OptionParser(usage=usage, version="%prog v.1.0")
+opts=OptionParser(usage=usage, version="%prog v.1.0.1")
 
 opts.add_option("--path", "-p", dest="db_dir", action="callback",
 callback=input, help="Path to directory with blast formated databases")
@@ -40,7 +40,7 @@ opts.add_option("--query", "-q", dest="query_file", action="callback",
 callback=input, help="Query sequene used for the BLAST analyses")
 
 opts.add_option("--all", "-a", dest="all_db", action="store_true", 
-default=False, help="Use all BLAST databases in indicated directory [NOT IMPL. YET]")
+default=False, help="Use all BLAST databases in indicated directory")
 
 opts.add_option("--mafft", "-m", dest="mafft_alignment", action="store_true",
 default=False, help="Use mafft to align the sequences")
