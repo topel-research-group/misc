@@ -14,4 +14,5 @@ for line in file:
 		line_nr += 1
 		excluded = "T"
 if excluded == "F":
-	print "all"
+	print "all",
+print ";"
