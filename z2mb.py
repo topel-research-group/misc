@@ -4,8 +4,6 @@ import sys
 
 in_file = sys.argv[1]
 cutoff = float(sys.argv[2])
-print type(cutoff)			# Devel
-print cutoff				# Devel.
 file = open(in_file, "r")
 line_nr = 1
 excluded = "F"
