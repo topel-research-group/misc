@@ -5,7 +5,8 @@ mcmc<-read.table(args,header=T,skip=6)
 # Illustrate standard deviation of split frequences in a graph.
 tiff("StdDev.tiff", width=2400, height=2400, res = 300)
 attach(mcmc)
-plot(mcmc$AvgStdDev.s., type="l",col="blue",xlab="Treesample")
+#plot(mcmc$AvgStdDev.s., type="l",col="blue",xlab="Treesample")		# Or perhaps try "StdDev.s." instead.
+plot(mcmc[,30], type="l",col="blue",xlab="Treesample")
 abline(.01,0)
 
 
