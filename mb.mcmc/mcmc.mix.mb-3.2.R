@@ -6,7 +6,9 @@ mcmc<-read.table(args,header=T,skip=6)
 tiff("StdDev.tiff", width=2400, height=2400, res = 300)
 attach(mcmc)
 #plot(mcmc$AvgStdDev.s., type="l",col="blue",xlab="Treesample")		# Or perhaps try "StdDev.s." instead.
-plot(mcmc[,30], type="l",col="blue",xlab="Treesample")
+#plot(mcmc[,30], type="l",col="blue",xlab="Treesample")
+plot(mcmc[,34], type="l", col="blue", xlab="Treesample", ylab="AvgStdDev", yaxt = "n")
+axis(2, at=c(0.25, 0.2, 0.15, 0.1, 0.05, 0.01), labels=c("0.25", "0.2", "0.15", "0.1", "0.05", "0.01"))
 abline(.01,0)
 
 
