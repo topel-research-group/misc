@@ -2,7 +2,6 @@
 
 from optparse import OptionParser
 from Bio.Blast.Applications import NcbiblastpCommandline
-from Bio.Blast.Applications import NcbiblastnCommandline
 import sys
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
@@ -52,9 +51,6 @@ default=False, help="Use linsi to align the sequences")
 opts.add_option("--nr_hits", "-n", dest="nr_of_hits", action="callback",
 callback=input, default=['1'], help="Same as the BLAST option 'max_target_seqs' that indicates the number of hits to save")
 
-opts.add_option("--blast_method", "-b", dest="blast_method", action="callback",
-callback=input, default=['blastp'], help="Select blast algorithm for [p]rotein-protein or [n]ucleotide-nucleotide analysis")
-
 options, arguments = opts.parse_args()
 
 ####################################################################
@@ -79,19 +75,14 @@ def run_blastdbcmd(xml_file, db_dir, database, query_file):
 
 ### Run the actuall BLAST analyses
 def blast(query_file, blast_db, out_file):
-	if options.blast_method[0] == "blastn":
-		blast_cmd = NcbiblastnCommandline(	query = query_file,
-											db = blast_db,
-											task = "blastn",
-											outfmt = 5,
-											max_target_seqs = options.nr_of_hits[0])
-	else:
-		blast_cmd = NcbiblastpCommandline(	query = query_file,
-											db = blast_db,
-											task = "blastp",
-											outfmt = 5,
-											max_target_seqs = options.nr_of_hits[0])
-
+	blast_cmd = NcbiblastpCommandline(  query = query_file,
+										db = blast_db,
+										out = out_file,
+										task = "blastp",
+										outfmt = 5,
+#										evalue = 1000)              # Hack. Better to check if "*.fasta" file exists.
+#										max_target_seqs = options.nr_of_hits[0])
+										max_target_seqs = options.nr_of_hits[0])
 	stdout, stderr = blast_cmd()
 
 
