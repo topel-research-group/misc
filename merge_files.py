@@ -31,10 +31,11 @@ def parse_file(inputFile1, inputFile2):
 	for key, value in dict1.iteritems():
 		try:
 			new_line = dict1[key] + dict2[key]
-			print str(new_line).replace("'", "").replace(",", "").replace("[", "").replace("]", "")
+			print (str(new_line).replace("'", "").replace(",", "").replace("[", "").replace("]", "")).replace(" ", "\t")
 		except KeyError:
-			print dict1[key]
-			print "Error"
+			sys.stderr.write("[Warning] Could not merge line %s with anything.\n" % dict1[key])
+#			print dict1[key]
+#			print "Error"
 
 
 if __name__ == "__main__":
