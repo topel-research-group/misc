@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# This script will execute a command ($1) in
+# This script will execute command(s) ($*) in
 # each subdirectory from where it is executed.
 #
-# Usage: for_each_dir_do.sh "ls -l *.txt"
-#	 for_each_dir_do.sh "fastqc *.fastq"
+# Usage: for_each_dir_do.sh ls -l *.txt
+#	 for_each_dir_do.sh fastqc *.fastq
 #
 # Warning: Use with CAUTION. 
 
