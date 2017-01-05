@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for file in $(ls *_peptide.fa);
+for file in $(ls *.proteins.fasta);
 do
-makeblastdb -in $file -out $(echo $file | sed -e 's/\_peptide.fa//g') -dbtype prot
+makeblastdb -in $file -out $(echo $file | sed -e 's/\.proteins.fasta//g') -dbtype prot
 done;
