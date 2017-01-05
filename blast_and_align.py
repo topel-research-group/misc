@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/local/opt/python/bin/python
+##!/usr/bin/env python
 
 from optparse import OptionParser
 from Bio.Blast.Applications import NcbiblastpCommandline

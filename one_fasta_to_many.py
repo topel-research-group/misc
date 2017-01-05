@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/opt/python/bin/python2.7
 
 # This script takes a multi sequence fasta file 
 # as input and creates new single sequence fasta 
