@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 # This program takes a fasta file as input and tries to 
 # move the sequence name to the beginning of the line. 
