@@ -1,8 +1,9 @@
-ngs
+misc
 ===
 
 Tools for handeling and analysing High throughput sequencing data
 
+# pairSeq.py
 
 Usage:		pairSeq.py <inFile_1> <inFile_2>
 
