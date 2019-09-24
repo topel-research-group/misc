@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/python2.7
 
 from optparse import OptionParser
 from Bio.Blast.Applications import NcbiblastpCommandline
