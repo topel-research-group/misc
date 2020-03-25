@@ -121,7 +121,8 @@ class Cluster(object):
 				else:
 					self.r_strain_list.append(line.split()[4].split("/")[0])
 					# Identity
-					self.r_identity_list.append(float(line.split()[4].split("%")[0].split("/")[1]))
+#					self.r_identity_list.append(float(line.split()[4].split("%")[0].split("/")[1]))
+					self.r_identity_list.append(float(line.split()[4].split("%")[0].split("/")[2]))
 	
 
 def readCDHITtable(infile):
