@@ -1,4 +1,5 @@
-#!/usr/local/packages/anaconda2/bin/python
+#!/usr/bin/env python3
+	#!/usr/local/packages/anaconda2/bin/python
 	#!/usr/local/opt/python/bin/python2.7
 
 ###################################################
@@ -50,7 +51,7 @@ class Result(object):
 	def setBestMatch(self, line):
 		try:
 			# Test if a match with a better e-value has already been saved.
-#			print self.best_match[line.split()[0]].split()[10]
+#			print(self.best_match[line.split()[0]].split()[10])
 			if float(self.best_match[line.split()[0]].split()[10]) > float(line.split()[10]):
 				self.best_match[line.split()[0]] = line
 		except KeyError:
@@ -86,7 +87,7 @@ def selection(line, result):
 		and float(line.split()[2]) >= float(args.identity)\
 		and int(line.split()[12]) >= int(args.q_length)\
 		and int(line.split()[13]) >= int(args.s_length):
-#		print float(line.split()[2]), float(args.identity)
+#		print(float(line.split()[2]), float(args.identity))
 		return True
 	else:
 		return False
@@ -161,9 +162,9 @@ def main():
 		# If the number of exons are of interest ...		
 		if args.exons >= 2:	
 			for pacid in gene_dict:
-#				print gene_dict[pacid].get_CDS_count(), args.exons
+#				print(gene_dict[pacid].get_CDS_count(), args.exons)
 				if int(gene_dict[pacid].get_CDS_count()) >= int(args.exons):
-					print pacid
+					print(pacid)
 #					if result.best_match.has_key(pacid_to_name[pacid]):
 #						print pacid_to_name[pacid]
 #						print result.misc_result(pacid_to_name[pacid])
@@ -176,29 +177,29 @@ def main():
 		# If number of exons is not interesting ...
 		for key in result.best_match:
 			# Pring query sequence name, e-value, length of query sequence and name of best match.
-			print result.best_match[key].split()[0] + "\t" \
+			print(result.best_match[key].split()[0] + "\t" \
 				+ result.best_match[key].split()[10] + "\t"	\
 				+ result.best_match[key].split()[12] + "\t"	\
-				+ result.best_match[key].split()[1]
+				+ result.best_match[key].split()[1])
 
 	else:
 		for group in args.group:
 			if group == "BAC":
 				for key in result.bact_result:
 					if fraction(result.bact_result, key, result):
-						print key
+						print(key)
 			if group == "DIA":
 				for key in result.diatom_result:
 					if fraction(result.diatom_result, key, result):
-						print key
+						print(key)
 			if group == "CHY":
 				for key in result.chytrid_result:
 					if fraction(result.chytrid_result, key, result):
-						print key
+						print(key)
 			if group == "OOM":
 				for key in result.oomyc_result:
 					if fraction(result.oomyc_result, key, result):
-						print key
+						print(key)
 
 			if group == "CONT":
 				from collections import Counter
@@ -208,7 +209,7 @@ def main():
 					c.update(d)
 				for key in dict(c):
 					if fraction(dict(c), key, result):
-						print key
+						print(key)
 
 def tests():
 	# Test if some subject sequences have the correct prefix.
