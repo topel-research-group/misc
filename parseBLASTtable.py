@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-	#!/usr/local/packages/anaconda2/bin/python
-	#!/usr/local/opt/python/bin/python2.7
 
 ###################################################
 #
