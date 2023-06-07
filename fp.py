@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright (C) 2014 Mats Töpel. mats.topel@bioenv.gu.se
@@ -98,9 +98,9 @@ def length():
 			for name, seq in read_fasta(my_file):
 				fs = fastaSeq(name, seq)
 				if args.header == True:
-					print fs.length(), fs.header()
+					print(fs.length(), fs.header())
 				else:
-					print fs.length()
+					print(fs.length())
 
 
 ### Print longest sequence to STDOUT, and the length to STDERR ###
@@ -115,8 +115,8 @@ def longest():
 					longest_seq = fs
 				else:
 					continue
-	print longest_seq
-	print >> sys.stderr, length
+	print(longest_seq)
+	print(length, file=sys.stderr)
 				
 
 ### Print sequences in common between two or more 
@@ -139,21 +139,21 @@ def duplicates_or_unique():
 				combi_header = ""
 				for header in sequence_dict[sequence]:
 					combi_header = combi_header.lstrip() + " " + header.rstrip()
-				print combi_header
-				print sequence
+				print(combi_header)
+				print(sequence)
 		
 		### Unique sequences ###
 		if args.unique == True:
 			if len(sequence_dict[sequence]) == 1:
 				for header in sequence_dict[sequence]:
-					print ">", header.rstrip()
-					print sequence
+					print(">", header.rstrip())
+					print(sequence)
 
 		### Remove duplicates ###
 		# Note: Will only remove identical sequences, not identical fasta headers
 		if args.remove == True:
-			print ">" + sequence_dict[sequence][0].rstrip()
-			print sequence
+			print(">" + sequence_dict[sequence][0].rstrip())
+			print(sequence)
 
 
 def print_sequence():
@@ -164,7 +164,7 @@ def print_sequence():
 #				if args.seq in fs.header():			# Fubar
 #				if args.seq + '\n' == fs.header():
 				if args.seq == fs.header():
-					print fs
+					print(fs)
 
 
 def filter_length():
@@ -174,7 +174,7 @@ def filter_length():
 			for name, seq in read_fasta(my_file):
 				fs = fastaSeq(name, seq)
 				if int(fs.length()) >= int(args.filter_length):
-					print fs
+					print(fs)
 
 def grep():
 	seq_dict = {}
@@ -185,17 +185,17 @@ def grep():
 					seq_dict[name.lstrip(">")] = seq
 		for header in grep_file.readlines():	
 			try:
-				print ">" + header + seq_dict[header.split()[0]]
+				print(">" + header + seq_dict[header.split()[0]])
 			except KeyError as e:
 				pass
 
 def gc():
 	for infile in args.files:
 		with open(infile) as my_file:
-			print "GC			Sequence"
+			print("GC			Sequence")
 			for name, seq in read_fasta(my_file):
 				fs = fastaSeq(name, seq)
-				print fs.get_gc() + "\t" + fs.header().rstrip()
+				print(fs.get_gc() + "\t" + fs.header().rstrip())
 
 def gaps():
 	n = 0
@@ -211,7 +211,7 @@ def gaps():
 				length += result[2]
 				ratio = (n + dash) / length
 #				print n, dash, ratio, length
-	print "N: %s \n-: %s \nRatio: %s \nTotal length: %s" % (n, dash, ratio, length)
+	print("N: %s \n-: %s \nRatio: %s \nTotal length: %s" % (n, dash, ratio, length))
 			
 
 #def grep():
